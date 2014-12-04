@@ -1,12 +1,10 @@
 {
-  "name": "frontend-workflows-with-angularjs",
+  "name": "angularjs-grunt-seed",
   "version": "0.0.0",
   "description": "README.md",
   "main": "Gruntfile.js",
   "repository": "",
-  "private": true,
-  "author": "david mosher",
-  "license": "BSD",
+  "author": "Maksym Dikhtiar",
   "dependencies": {
     "grunt-contrib-uglify": "0.2.2",
     "grunt-contrib-cssmin": "0.6.0",
