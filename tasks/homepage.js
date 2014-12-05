@@ -10,6 +10,6 @@ module.exports = function(grunt) {
     source = grunt.file.read(template);
     context = _(grunt.config.get()).extend(targetConfig.context);
     grunt.file.write(targetConfig.dest, _(source).template(context));
-    grunt.log.writeln("Homepage HTML written to '" + targetConfig.dest + "'");
+    grunt.log.ok("Homepage HTML written to '" + targetConfig.dest + "'");
   });
 };

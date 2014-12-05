@@ -6,13 +6,13 @@
                  .module('app')
                  .controller('testCtrl',testCtrl);
 
-                 testCtrl.$inject = ['$log']
+                 testCtrl.$inject = ['$log'];
 
                  function testCtrl($log){
-                            var test = this;
+                            var test = this; 
 
                             test.msg = "AngularJs-Grund-Seed";
-                            $log.info('compited')
+                            $log.info('compited')             
 
                  }
-})();
+})();     

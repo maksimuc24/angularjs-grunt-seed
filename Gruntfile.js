@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+   
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
 
@@ -50,19 +51,31 @@ module.exports = function(grunt) {
         watch: {
             js: {
                 files: ["<%= concat.js.src %>"],
-                tasks: ["concat:js"]
+                tasks: ["concat:js"],
+                options: {
+                  livereload: true
+                }
             },
             css: {
                 files: ["<%= concat.css.src %>"],
-                tasks: ["concat:css"]
+                tasks: ["concat:css"],
+                options: {
+                  livereload: true
+                }
             },
             homepage: {
                 files: ["<%= homepage.template %>"],
-                tasks: ["homepage:dev"]
+                tasks: ["homepage:dev"],
+                options: {
+                  livereload: true
+                }
             },
             copy_dir: {
-                files: ["src/**/**/**/**"],
-                tasks: ["copyto"]
+                files: ["src/copy-dir/**/*"],
+                tasks: ["copyto"],
+                options: {
+                  livereload: true
+                }
             }
         },
 
@@ -148,7 +161,18 @@ module.exports = function(grunt) {
                     css: 'app.min.css'
                 }
             }
-        }
+        },
+         // Configuration to be run (and then tested).
+            tbp_win8encode: {
+              default_options: {
+                options: {
+                },
+                files: {
+                  'tmp/default_options': ['<%= homepage.dev.dest %>'],
+                },
+              }
+            },
+    
     });
 
 
@@ -159,12 +183,15 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.loadNpmTasks('grunt-copy-to');
+    grunt.loadNpmTasks('grunt-tbp-win8encode');
 
     grunt.loadTasks("tasks");
-
-    grunt.registerTask('dev', ['clean:dev', 'concat', 'homepage:dev', 'ngtemplates:dev', 'copyto:dev','watch']);
+   
+   // url for Livereload description
+   //https://github.com/gruntjs/grunt-contrib-watch/blob/master/docs/watch-examples.md#enabling-live-reload-in-your-html
+    grunt.registerTask('dev', ['clean:dev', 'concat', 'homepage:dev', 'ngtemplates:dev', 'copyto:dev','tbp_win8encode','watch']);
     grunt.registerTask('dist', ['clean:dist', 'concat', 'uglify', 'cssmin', 'homepage:dist','ngtemplates:dist','copyto:dist']);
 
     //run dev or dist Task
-    grunt.registerTask('default', 'dist');
+    grunt.registerTask('default', 'dev');
 };
