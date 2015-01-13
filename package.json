@@ -17,6 +17,7 @@
     "grunt-angular-templates": "^0.5.7",
     "grunt-contrib-copy": "^0.7.0",
     "grunt-copy-to": "0.0.12",
+    "grunt-ngdocs": "~0.1.1",
     "grunt-tbp-win8encode": "^0.1.0"
   }
 }
