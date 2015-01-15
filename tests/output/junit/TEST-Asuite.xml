@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="A suite" errors="0" tests="1" failures="0" time="0.003" timestamp="Thu Jan 15 2015 13:58:24 GMT+0200 (Финляндия (зима))">
+    
+      <testcase assertions="0" classname="A suite" name="contains spec with an expectation" time="0.001">
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>

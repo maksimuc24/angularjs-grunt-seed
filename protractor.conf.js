@@ -36,7 +36,7 @@ exports.config = {
   //
   // Spec patterns are relative to the location of this config.
   specs: [
-    './specs/*.js'
+    './specs/**/**/*.js'
   ],
 
   // ----- Capabilities to be passed to the webdriver instance ----
@@ -48,6 +48,8 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome'
   },
+  
+
 
   // A base URL for your application under test. Calls to protractor.get()
   // with relative paths will be prepended with this.
@@ -64,18 +66,18 @@ exports.config = {
          pathBuilder: function pathBuilder(spec, descriptions, results, capabilities) {
           
             var monthMap = {
-              "1": "Jan",
-              "2": "Feb",
-              "3": "Mar",
-              "4": "Apr",
-              "5": "May",
-              "6": "Jun",
-              "7": "Jul",
-              "8": "Aug",
-              "9": "Sep",
-              "10": "Oct",
-              "11": "Nov",
-              "12": "Dec"
+              "0": "Jan",
+              "1": "Feb",
+              "2": "Mar",
+              "3": "Apr",
+              "4": "May",
+              "5": "Jun",
+              "6": "Jul",
+              "7": "Aug",
+              "8": "Sep",
+              "9": "Oct",
+              "10": "Nov",
+              "11": "Dec"
             };
 
             var currentDate = new Date(),
@@ -83,7 +85,7 @@ exports.config = {
                 currentTimeInHours = currentHoursIn24Hour>12? currentHoursIn24Hour-12: currentHoursIn24Hour,
                 totalDateString = currentDate.getDate()+'-'+ monthMap[currentDate.getMonth()]+ '-'+(currentDate.getYear()+1900) + 
                                       '-'+ currentTimeInHours+'h-' + currentDate.getMinutes()+'m';
-
+            console.log(currentDate.getMonth())
             return path.join(totalDateString,capabilities.caps_.browserName, descriptions.join('-'));
          }
       }));
@@ -100,6 +102,6 @@ exports.config = {
     // If true, include stack traces in failures.
     includeStackTrace: true,
     // Default time to wait in ms before a test fails.
-    defaultTimeoutInterval: 10000
+    defaultTimeoutInterval: 100000
   }
 };

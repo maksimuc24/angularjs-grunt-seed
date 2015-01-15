@@ -1,10 +1,9 @@
 module.exports = function(grunt) {
-
             grunt.initConfig({
                         pkg: grunt.file.readJSON("package.json"),
 
                         jshint: {
-                                    files: ['Gruntfile.js', 'specs/*.js'],
+                                    files: ['Gruntfile.js', 'specs/*.js', 'spec/**/*.js'],
                                     options: {
                                                 // options here to override JSHint defaults
                                                 globals: {
@@ -15,6 +14,16 @@ module.exports = function(grunt) {
                                                 }
                                     }
 
+                        },
+                        jasmine: {
+                                    src: 'src/**/**/*.js',
+                                    options: {
+                                                vendor: ['<%= concat.js.src %>'],
+                                                specs: 'spec/**/*.js',
+                                                junit: {
+                                                            path: 'tests/output/junit'
+                                                },
+                                    }
                         },
                         protractor: {
                                     options: {
@@ -58,8 +67,9 @@ module.exports = function(grunt) {
 
                         concat: {
                                     js: {
-                                                src: [
+                                                src: [      
                                                             'vendor/js/angular.js',
+                                                            'vendor/js/angular-mocks.js',
                                                             'vendor/js/**/*.js',
                                                             'src/js/**/*.js'
                                                 ],
@@ -89,6 +99,13 @@ module.exports = function(grunt) {
                         },
 
                         watch: {
+                                    jasmine : {
+                                                files: ["<%= jasmine.options.specs%>"],
+                                                tasks: ["jasmine"],
+                                                options: {
+                                                            livereload: true
+                                                }
+                                    },
                                     js: {
                                                 files: ["<%= concat.js.src %>"],
                                                 tasks: ["concat:js", "ngdocs"],
@@ -218,6 +235,7 @@ module.exports = function(grunt) {
                                     },
                                     all: ['src/**/**/*.js']
                         },
+
             });
 
 
@@ -233,6 +251,7 @@ module.exports = function(grunt) {
             grunt.loadNpmTasks('grunt-protractor-runner');
             grunt.loadNpmTasks('grunt-contrib-jshint');
             grunt.loadNpmTasks('grunt-shell-spawn');
+            grunt.loadNpmTasks('grunt-contrib-jasmine');
 
 
             grunt.loadTasks("tasks");
@@ -248,6 +267,7 @@ module.exports = function(grunt) {
                         'ngdocs',
                         'jshint',
                         'protractor:singlerun',
+                        'jasmine',
                         'watch'
 
             ]);

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="testCtrl1 " errors="0" tests="1" failures="0" time="0.012" timestamp="Thu Jan 15 2015 13:17:50 GMT+0200 (Финляндия (зима))">
+    
+      <testcase assertions="0" classname="testCtrl1 " name="testCtrl  to test" time="0.01">
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>

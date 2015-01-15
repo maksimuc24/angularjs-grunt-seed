@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="sorting the list of users" errors="1" tests="1" failures="1" time="0.003" timestamp="Thu Jan 15 2015 12:04:28 GMT+0200 (Финляндия (зима))">
+    
+      <testcase assertions="0" classname="sorting the list of users" name="sorts in descending order by default" time="0.002">
+        
+          <failure><![CDATA[ReferenceError: Can't find variable: sortUsers in file:///C:/WebServers/home/angularjs-grunt-seed/www/spec/testSpec.js (line 9)]]></failure>
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>
