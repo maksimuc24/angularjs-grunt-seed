@@ -16,8 +16,13 @@
   "devDependencies": {
     "grunt-angular-templates": "^0.5.7",
     "grunt-contrib-copy": "^0.7.0",
+    "grunt-contrib-jshint": "^0.10.0",
     "grunt-copy-to": "0.0.12",
     "grunt-ngdocs": "~0.1.1",
-    "grunt-tbp-win8encode": "^0.1.0"
+    "grunt-protractor-runner": "^1.1.4",
+    "grunt-shell-spawn": "^0.3.1",
+    "grunt-tbp-win8encode": "^0.1.0",
+    "protractor": "^1.6.1",
+    "protractor-html-screenshot-reporter": "0.0.19"
   }
 }

@@ -3,6 +3,46 @@ module.exports = function(grunt) {
             grunt.initConfig({
                         pkg: grunt.file.readJSON("package.json"),
 
+                        jshint: {
+                                    files: ['Gruntfile.js', 'specs/*.js'],
+                                    options: {
+                                                // options here to override JSHint defaults
+                                                globals: {
+                                                            jQuery: true,
+                                                            console: true,
+                                                            module: true,
+                                                            document: true
+                                                }
+                                    }
+
+                        },
+                        protractor: {
+                                    options: {
+                                                keepAlive: true,
+                                                configFile: "protractor.conf.js"
+                                    },
+                                    singlerun: {},
+                                    auto: {
+                                                keepAlive: true,
+                                                options: {
+                                                            args: {
+                                                                        seleniumPort: 4444
+                                                            }
+                                                }
+                                    }
+                        },
+                        shell: {
+                                    options: {
+                                                stdout: true
+                                    },
+                                    protractor_install: {
+                                                command: 'node ./node_modules/protractor/bin/webdriver-manager update'
+                                    },
+                                    npm_install: {
+                                                command: 'npm install'
+                                    }
+                        },
+
                         meta: {
                                     banner: "/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today(\"yyyy-mm-dd\") %> */\n"
                         },
@@ -51,7 +91,7 @@ module.exports = function(grunt) {
                         watch: {
                                     js: {
                                                 files: ["<%= concat.js.src %>"],
-                                                tasks: ["concat:js"],
+                                                tasks: ["concat:js", "ngdocs"],
                                                 options: {
                                                             livereload: true
                                                 }
@@ -190,12 +230,28 @@ module.exports = function(grunt) {
             grunt.loadNpmTasks('grunt-copy-to');
             grunt.loadNpmTasks('grunt-tbp-win8encode');
             grunt.loadNpmTasks('grunt-ngdocs');
+            grunt.loadNpmTasks('grunt-protractor-runner');
+            grunt.loadNpmTasks('grunt-contrib-jshint');
+            grunt.loadNpmTasks('grunt-shell-spawn');
+
 
             grunt.loadTasks("tasks");
 
             // url for Livereload description
             //https://github.com/gruntjs/grunt-contrib-watch/blob/master/docs/watch-examples.md#enabling-live-reload-in-your-html
-            grunt.registerTask('dev', ['clean:dev', 'concat', 'homepage:dev', 'ngtemplates:dev', 'copyto:dev', 'tbp_win8encode', 'ngdocs', 'watch']);
+            grunt.registerTask('dev', ['clean:dev',
+                        'concat',
+                        'homepage:dev',
+                        'ngtemplates:dev',
+                        'copyto:dev',
+                        'tbp_win8encode',
+                        'ngdocs',
+                        'jshint',
+                        'protractor:singlerun',
+                        'watch'
+
+            ]);
+            grunt.registerTask('install', ['shell:npm_install', 'shell:protractor_install']);
             grunt.registerTask('dist', ['clean:dist', 'concat', 'uglify', 'cssmin', 'homepage:dist', 'ngtemplates:dist', 'copyto:dist']);
 
             //run dev or dist Task
